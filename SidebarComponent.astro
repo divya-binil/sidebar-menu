@@ -1,9 +1,14 @@
 ---
-const { menuData } = Astro.props;
-console.log({menuData});
+import './style.css';
+
+const { customLiClass,customUlClass,menuData } = Astro.props;
+function toCamelCase(str) {
+  const words = str.split(/[-_]+/);
+  const capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1));
+  return capitalizedWords.join(' ');
+}
 function flattenMenu(menuData, level = 0) {
   const flattenedMenu = [];
-
   function flatten(menuItems, parentLevel) {
     menuItems.forEach((menuItem) => {
       menuItem.level = parentLevel + 1;
@@ -13,22 +18,43 @@ function flattenMenu(menuData, level = 0) {
       }
     });
   }
-
   flatten(menuData, level);
   return flattenedMenu;
 }
 --- 
-<ul class="bg-green-600">
-  {flattenMenu(menuData).map((menuItem) => (
-    <li class="policy_cmp py-1" key={menuItem.label} style={{ marginLeft: `${menuItem.level * 20}px` }}>
-      <a href={menuItem.url}>
-        {menuItem.label}
-      </a>
-    </li>
-  ))}
-</ul>
 
-<button class="bg-sky-500/100 ...">24658468947</button>
-<p class="text-2xl">The quick brown fox ...</p>
+<aside class="theme-doc-sidebar-container">
+  <div class="sidebarViewport_K3q9">
+    <div class="sidebar_vtcw sidebarWithHideableNavbar_tZ9s">
+      <nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_rWGR menuWithAnnouncementBar_Pf08">
+        <ul class={customUlClass || "theme-doc-sidebar-menu menu__list"}>
+          {flattenMenu(menuData).map((menuItem) => (
+            <li
+              class={`${customLiClass || "theme-doc-sidebar-item-link"} level-${menuItem.level} ${menuItem.submenus ? 'menu__list-item-collapsible' : ''}`}
+              key={menuItem.label}
+              style={customLiClass ? {} : { marginLeft: `${menuItem.level * 20}px` }}
+            >
+              {menuItem.submenus && menuItem.submenus.length > 0 ? (
+                <div class="menu__list-item-collapsible">
+                  <a class="menu__link menu__link--sublist" aria-expanded="false" href={menuItem.url}>{toCamelCase(menuItem.label)}</a>
+                  <button aria-label="Expand sidebar category" type="button" class="clean-btn menu__caret"></button>
+                </div>
+              ) : (
+                <a class="menu__link" href={menuItem.url}>
+                  {toCamelCase(menuItem.label)}
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</aside>
+
+
+
+
+
 
 

@@ -1,6 +1,6 @@
 {
-  "name": "@divya-binil/sidebar-menu",
-  "version": "1.0.0",
+  "name": "astro-sidebar-menu",
+  "version": "1.0.4",
   "description": "Display file based routing and menu",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,8 @@
   },
   "keywords": [
     "sidebar",
-    "menu"
+    "menu",
+    "astro"
   ],
   "author": "divya-binil",
   "license": "ISC",
