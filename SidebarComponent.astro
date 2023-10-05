@@ -1,6 +1,4 @@
 ---
-import './style.css';
-
 const { customLiClass,customUlClass,menuData } = Astro.props;
 function toCamelCase(str) {
   const words = str.split(/[-_]+/);
@@ -37,7 +35,6 @@ function flattenMenu(menuData, level = 0) {
               {menuItem.submenus && menuItem.submenus.length > 0 ? (
                 <div class="menu__list-item-collapsible">
                   <a class="menu__link menu__link--sublist" aria-expanded="false" href={menuItem.url}>{toCamelCase(menuItem.label)}</a>
-                  <button aria-label="Expand sidebar category" type="button" class="clean-btn menu__caret"></button>
                 </div>
               ) : (
                 <a class="menu__link" href={menuItem.url}>

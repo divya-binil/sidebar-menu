@@ -1,6 +1,6 @@
 {
   "name": "astro-sidebar-menu",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Display file based routing and menu",
   "main": "index.js",
   "scripts": {
@@ -28,5 +28,8 @@
   "files": [
     "index.js",
     "SidebarComponent.astro"
-  ]
+  ],
+  "dependencies": {
+
+  }
 }
